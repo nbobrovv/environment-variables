@@ -82,14 +82,16 @@ def load_students(file_name):
     """
 
     with open(file_name, "r", encoding="utf-8") as fin:
-        return json.load(fin)
+        loaded = json.load(fin)
+    return loaded
 
 
 def main(command_line=None):
     # Создать родительский парсер для определения имени файла.
     file_parser = argparse.ArgumentParser(add_help=False)
     file_parser.add_argument(
-        "filename",
+        "-d",
+        "--data",
         action="store",
         help="The data file name"
     )

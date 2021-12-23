@@ -98,7 +98,7 @@ def select(filename):
             click.secho("The file is missing", fg="red")
             sys.exit(1)
         if os.path.exists(dotenv_path):
-            students = open(dotenv_path)
+            students = load_students(dotenv_path)
         else:
             students = []
         line = '+-{}-+-{}-+-{}-+-{}-+'.format(
@@ -123,11 +123,15 @@ def select(filename):
         for student in students:
             grade = list(map(int, student.get('grade', '').split()))
             if sum(grade) / max(len(grade), 1) >= 4.0:
-                print(
-                    '{:>4} {}'.format('*', student.get('name', '')),
-                    '{:>1} {}'.format('группа №', student.get('group', ''))
-                )
                 count += 1
+                print(
+                    '| {:>4} | {:<30} | {:<20} | {:>15} |'.format(
+                            count,
+                            student.get('name', ''),
+                            student.get('group', ''),
+                            student.get('grade', 0)
+                    )
+                )
         print(line)
 
 
