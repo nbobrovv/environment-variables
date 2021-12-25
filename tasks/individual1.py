@@ -8,7 +8,9 @@ import sys
 
 
 def add_student(students, name, group, grade):
-    # Запросить данные о студенте.
+    """
+    Добавить данные о студенте
+    """
     students.append(
         {
             'name': name,
@@ -20,6 +22,9 @@ def add_student(students, name, group, grade):
 
 
 def show_list(students):
+    """
+    Отобразить список студентов
+    """
     # Заголовок таблицы.
     if students:
 
@@ -56,6 +61,9 @@ def show_list(students):
 
 
 def show_selected(students):
+    """
+    Вывести студентов с баллом 4.0 и выше
+    """
     # Инициализировать счетчик.
     count = 0
     # Проверить сведения студентов из списка.
@@ -72,6 +80,9 @@ def show_selected(students):
 
 
 def save_students(file_name, students):
+    """
+    Сохранить данные о студенте
+    """
     with open(file_name, "w", encoding="utf-8") as fout:
         json.dump(students, fout, ensure_ascii=False, indent=4)
 
@@ -80,7 +91,6 @@ def load_students(file_name):
     """
     Загрузить всех работников из файла JSON
     """
-
     with open(file_name, "r", encoding="utf-8") as fin:
         loaded = json.load(fin)
     return loaded
@@ -188,7 +198,6 @@ def main(command_line=None):
     # Выбрать требуемых студентов.
     elif args.command == "select":
         show_selected(students)
-        show_list(students)
 
     # Сохранить данные в файл, если список студентов был изменен.
     if is_dirty:

@@ -20,6 +20,9 @@ def cli():
 @click.option("-g", "--group")
 @click.option("-gr", "--grade")
 def add(data, name, group, grade):
+    """
+    Добавить данные о студенте
+    """
     if os.path.exists(data):
         load_dotenv()
         dotenv_path = os.getenv("STUDENTS_DATA")
@@ -47,6 +50,9 @@ def add(data, name, group, grade):
 @cli.command()
 @click.argument('filename')
 def display(filename):
+    """
+    Вывести список студентов
+    """
     # Заголовок таблицы.
     if os.path.exists(filename):
         load_dotenv()
@@ -91,6 +97,9 @@ def display(filename):
 @cli.command()
 @click.argument('filename')
 def select(filename):
+    """
+    Отобразить студентов с баллом 4.0 и выше
+    """
     if os.path.exists(filename):
         load_dotenv()
         dotenv_path = os.getenv("STUDENTS_DATA")
@@ -136,13 +145,12 @@ def select(filename):
 
 
 def load_students(filename):
+    """
+    Загрузить список студентов из файла JSON
+    """
     with open(filename, "r", encoding="utf-8") as fin:
         return json.load(fin)
 
 
-def main():
-    cli()
-
-
 if __name__ == '__main__':
-    main()
+    cli()
