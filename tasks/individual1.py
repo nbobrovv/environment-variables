@@ -65,16 +65,37 @@ def show_selected(students):
     Вывести студентов с баллом 4.0 и выше
     """
     # Инициализировать счетчик.
+    line = '+-{}-+-{}-+-{}-+-{}-+'.format(
+        '-' * 4,
+        '-' * 30,
+        '-' * 20,
+        '-' * 15
+    )
+    print(line)
+    print(
+        '| {:^4} | {:^30} | {:^20} | {:^15} |'.format(
+            "№",
+            "Ф.И.О.",
+            "Группа",
+            "Успеваемость"
+        )
+    )
+    print(line)
     count = 0
     # Проверить сведения студентов из списка.
     for student in students:
         grade = list(map(int, student.get('grade', '').split()))
         if sum(grade) / max(len(grade), 1) >= 4.0:
-            print(
-                '{:>4} {}'.format('*', student.get('name', '')),
-                '{:>1} {}'.format('группа №', student.get('group', ''))
-            )
             count += 1
+            print(
+                '| {:>4} | {:<30} | {:<20} | {:>15} |'.format(
+                    count,
+                    student.get('name', ''),
+                    student.get('group', ''),
+                    student.get('grade', 0)
+                )
+            )
+    print(line)
     if count == 0:
         print("Студенты с баллом 4.0 и выше не найдены.")
 
